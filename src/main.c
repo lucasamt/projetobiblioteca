@@ -23,6 +23,6 @@ Renato Donizeti da Silva Junior 20014023
 
 int main()
 {
-    
+
     return 0;
 }
