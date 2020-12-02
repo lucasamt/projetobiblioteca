@@ -21,8 +21,75 @@ Renato Donizeti da Silva Junior 20014023
 #include "./mods/main.c"
 #define T 1024
 
+typedef
+    struct
+{
+  char nome_Livro[30];
+  char nome_Autor[60];
+  char data_Publicacao[11];
+}Cadastro;
+
+typedef
+    enum
+{
+  CADASTRAR,
+  CONSULTAR,
+  EXCLUIR,
+  SAIR
+}Escolha;
+
+unsigned int filesize (FILE* sisbibli)
+{
+    Cadastro cad;
+    int posicao, retorno, posOriginal;
+
+    posOriginal = ftell(mc);
+
+    fseek (mc, 0, SEEK_END);
+    posicao = ftell(mc)/sizeof(cad)-1;
+
+    if (posicao==-1)
+    {
+        fseek (mc, posOriginal, SEEK_SET);
+        return 0;
+    }
+   for (;;)
+    {
+        fseek (sisbibli, posicao*sizeof(Cadastro), SEEK_SET);
+        fread (&cad, sizeof(Cadrasto), 1, mc);
+
+        if (vazio(cad))
+        {
+            posicao--;
+            if (posicao==-1)
+            {
+                fseek (sisbibli, posOriginal, SEEK_SET);
+                return 0;
+            }
+        }
+        else
+        {
+            retorno = ftell(sisbibli);
+            fseek (sisbibli, posOriginal, SEEK_SET);
+            return retorno;
+        }
+    }
+
+    retorno = ftell(sisbibli);
+    fseek (sisbibli, posOriginal, SEEK_SET);
+    return retorno;
+}
+
+
+void menu()
+{
+   printf ("+------------------------+\n");
+   printf ("| SISTEMA DE BIBLIOTECA |\n");
+   printf ("+-----------------------+\n\n");
+}
 int main()
 {
+    //Fazer DO WHILE com switch case dentro do DO WHILE e colocar para voltar ao menu toda vez que a condição for diferente de SAIR
 
     return 0;
 }
