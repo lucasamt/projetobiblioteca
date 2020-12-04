@@ -1,3 +1,4 @@
+/*
 int atoi(const char* str)
 {
     int num = 0;
@@ -67,4 +68,32 @@ void limparCaractere(char str)
 void limparString(char *str)
 {
     memset(str,0,sizeof(str));
+}
+*/
+Escolha opcao_Escolha()
+{
+  //OPÇÃO PARA ESCOLHA DO MENU
+}
+
+void menu()
+{
+   printf ("+------------------------+\n");
+   printf ("| SISTEMA DE BIBLIOTECA |\n");
+   printf ("+-----------------------+\n\n");
+}
+
+void cadastro_Livros (FILE* sisbibli)
+{
+    Cadastro cad;
+
+    printf ("\nNome do livro.....: ");
+    gets   (cad.nome_Livro);
+    printf ("\nNome do Autor.....: ");
+    gets   (cad.nome_Autor);
+    printf ("\nData de Publicação: ");
+    gets   (cad.data_Publicacao);
+
+    //definir como passar
+    //fseek  (mc, qtosContatos(mc)*sizeof(Contato), SEEK_SET);
+    //fwrite (&contato, sizeof(Contato), 1, mc);
 }

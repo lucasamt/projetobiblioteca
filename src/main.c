@@ -43,20 +43,20 @@ unsigned int filesize (FILE* sisbibli)
     Cadastro cad;
     int posicao, retorno, posOriginal;
 
-    posOriginal = ftell(mc);
+    posOriginal = ftell(sisbibli);
 
     fseek (mc, 0, SEEK_END);
-    posicao = ftell(mc)/sizeof(cad)-1;
+    posicao = ftell(sisbibli)/sizeof(cad)-1;
 
     if (posicao==-1)
     {
-        fseek (mc, posOriginal, SEEK_SET);
+        fseek (sisbibli, posOriginal, SEEK_SET);
         return 0;
     }
    for (;;)
     {
         fseek (sisbibli, posicao*sizeof(Cadastro), SEEK_SET);
-        fread (&cad, sizeof(Cadrasto), 1, mc);
+        fread (&cad, sizeof(Cadrasto), 1, sisbibli);
 
         if (vazio(cad))
         {
@@ -80,13 +80,6 @@ unsigned int filesize (FILE* sisbibli)
     return retorno;
 }
 
-
-void menu()
-{
-   printf ("+------------------------+\n");
-   printf ("| SISTEMA DE BIBLIOTECA |\n");
-   printf ("+-----------------------+\n\n");
-}
 int main()
 {
     //Fazer DO WHILE com switch case dentro do DO WHILE e colocar para voltar ao menu toda vez que a condição for diferente de SAIR
