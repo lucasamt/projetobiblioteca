@@ -363,8 +363,8 @@ void Alterar_Usuario()
 void menu()
 {
     setlocale(LC_ALL, "portuguese");
-    int num, iacount=0, x=1, qntd[100], excluidos=0;
-    char escolha;
+    int num;
+
 
     do
     {
@@ -373,7 +373,7 @@ void menu()
 
         // Dividir menu?
 
-        printf("Bem vindo!\n");
+        printf("Bem vindo ao Sistema de Biblioteca!\n");
         printf("1 - Incluir Livro\n");
         printf("2 - Remover Livro\n");
         printf("3 - Emprestar Livro\n");
