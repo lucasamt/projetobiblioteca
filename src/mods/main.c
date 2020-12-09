@@ -1,4 +1,4 @@
-void Incluir_Livro(list a[100], int *contador, int quantidade[100])
+void Incluir_Livro()
 {
     // char escolha;
     // int  h, cont, quant;
@@ -38,7 +38,7 @@ void Incluir_Livro(list a[100], int *contador, int quantidade[100])
     // *contador+=cont;
 }
 
-void Remover_Livro(list b[100], int quanti[100], int *bcont, int *exc)
+void Remover_Livro()
 {
     // char excluir_RA[9], esco;
     // int x, y, z, qtd=0, aux=0, cont=0, num=0;
@@ -89,7 +89,7 @@ void Remover_Livro(list b[100], int quanti[100], int *bcont, int *exc)
     // }while(cont==0);
 }
 
-void Emprestar_Livro(list a[100], int *contador, int quant[100])
+void Emprestar_Livro()
 {
     // char ra[10];
     // int x, y, h, aux, contador2, cont, num;
@@ -150,7 +150,7 @@ void Emprestar_Livro(list a[100], int *contador, int quant[100])
     // }while(contador2==0);
 }
 
-void Busca_Livro(list d[100], int quant[100], int *buscacont)
+void Busca_Livro()
 {
     // char ra[9];
     // int x, y, cont, aux, num, contador;
@@ -216,7 +216,7 @@ void Busca_Livro(list d[100], int quant[100], int *buscacont)
     system("pause");
 }*/
 
-void Incluir_Usuario(list a[100], int *contador, int quantidade[100])
+void Incluir_Usuario()
 {
     // char escolha;
     // int  h, cont, quant;
@@ -256,7 +256,7 @@ void Incluir_Usuario(list a[100], int *contador, int quantidade[100])
     // *contador+=cont;
 }
 
-void Remover_Usuario(list b[100], int quanti[100], int *bcont, int *exc)
+void Remover_Usuario()
 {
     // char excluir_RA[9], esco;
     // int x, y, z, qtd=0, aux=0, cont=0, num=0;
@@ -307,7 +307,7 @@ void Remover_Usuario(list b[100], int quanti[100], int *bcont, int *exc)
     // }while(cont==0);
 }
 
-void Alterar_Usuario(list b[100], int quanti[100], int *bcont, int *exc)
+void Alterar_Usuario()
 {
     // char excluir_RA[9], esco;
     // int x, y, z, qtd=0, aux=0, cont=0, num=0;
@@ -364,7 +364,6 @@ void menu()
 {
     setlocale(LC_ALL, "portuguese");
     int num, iacount=0, x=1, qntd[100], excluidos=0;
-    list exe[100];
     char escolha;
 
     do
@@ -388,19 +387,19 @@ void menu()
 
         switch(num)
         {
-            case 1: Incluir_Livro(exe, &iacount, qntd);
+            case 1: Incluir_Livro();
                 break;
-            case 2: Remover_Livro(exe, qntd, &iacount, &excluidos);
+            case 2: Remover_Livro();
                 break;
-            case 3: Emprestar_Livro(exe, &iacount, qntd);
+            case 3: Emprestar_Livro();
                 break;
-            case 4: Busca_Livro(exe, qntd, &iacount);
+            case 4: Busca_Livro();
                 break;
-            case 5: Incluir_Usuario(exe, &iacount, qntd);
+            case 5: Incluir_Usuario();
                 break;
-            case 6: Remover_Usuario(exe, &iacount, qntd);
+            case 6: Remover_Usuario();
                 break;
-            case 7: Alterar_Usuario(exe, &iacount, qntd);
+            case 7: Alterar_Usuario();
                 break;
             case 8: exit(0);
                 break;

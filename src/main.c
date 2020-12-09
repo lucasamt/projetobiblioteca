@@ -22,7 +22,7 @@ Renato Donizeti da Silva Junior 20014023
 
 #include "./mods/main.c"
 #include "./mods/models/livro.c"
-#include "./mods/models/usuarios.c"
+#include "./mods/models/usuario.c"
 
 
 int main()
