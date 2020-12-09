@@ -1,41 +1,30 @@
-void Incluir_Livro()
+void Cadastrar_Livro(Livro l[T], int *qtd_livros)
 {
-    // char escolha;
-    // int  h, cont, quant;
-    // cont = *contador;
-    // do
-    // {
-    //     printf("Digite o seu nome: ");
-    //     fflush(stdin);
-    //     gets(a[cont].nome);
-    //     printf("Digite o seu RA: ");
-    //     fflush(stdin);
-    //     gets(a[cont].RA);
-    //     printf("\nQuantas matérias cursando? ");
-    //     scanf("%d", &quant);
-    //     for(h=0;h<quant;h++)
-    //     {
-    //         printf("Digite o nome da disciplina: ");
-    //         fflush(stdin);
-    //         gets(a[cont].disciplina[h].materia);
-    //         printf("Nota 1: ");
-    //         scanf("%f", &a[cont].disciplina[h].nota1);
-    //         printf("Nota 2: ");
-    //         scanf("%f", &a[cont].disciplina[h].nota2);
-    //     }
-    //     do
-    //     {
-    //         printf("Voce deseja adicionar mais algum aluno?\nDigite \"S\" para sim ou \"N\" para não: ");
-    //         scanf(" %c", &escolha);
-    //         if (toupper(escolha) != 'S' && toupper(escolha) != 'N')
-    //         {
-    //             printf("\nESCOLHA INVÁLIDA!!!\nDigite Novamente...");
-    //         }
-    //     } while (toupper(escolha) != 'S' && toupper(escolha) != 'N');
-    //     quantidade[cont]=quant;
-    //     cont++;
-    // }while(toupper(escolha)!='N');
-    // *contador+=cont;
+    int contador_Livro = *qtd_livros;
+    char escolha;
+     do
+     {
+         printf("Digite o nome do livro: ");
+         fflush(stdin);
+         gets(l[contador_Livro].nome_Livro);
+         printf("Digite o seu autor: ");
+         fflush(stdin);
+         gets(l[contador_Livro].nome_Autor);
+         printf("Digite sua data de publicação: ");
+         fflush(stdin);
+         gets(l[contador_Livro].data_Publicacao);
+         do
+         {
+             printf("Voce deseja adicionar mais livros?\n\"S\" ou \"N\":");
+             scanf(" %c", &escolha);
+             if (toupper(escolha) != 'S' && toupper(escolha) != 'N')
+             {
+                 printf("\nESCOLHA INVÁLIDA!!!\nDigite Novamente...");
+             }
+         } while (toupper(escolha) != 'S' && toupper(escolha) != 'N');
+         contador_Livro++;
+     }while(toupper(escolha)!='N');
+     *qtd_livros+=contador_Livro;
 }
 
 void Remover_Livro()
@@ -363,9 +352,9 @@ void Alterar_Usuario()
 void menu()
 {
     setlocale(LC_ALL, "portuguese");
-    int num;
-
-
+    Livro l[T]; //criação de um vetor para armazenar as informações sobre o livro a partir da typedef
+    Usuario u[T]; //criação de um vetor para armazenar as informações sobre o usuario a partir da typedef
+    int num, qtd_livros = 0;
     do
     {
         num=0;
@@ -374,7 +363,7 @@ void menu()
         // Dividir menu?
 
         printf("Bem vindo ao Sistema de Biblioteca!\n");
-        printf("1 - Incluir Livro\n");
+        printf("1 - Cadastrar Livro\n");
         printf("2 - Remover Livro\n");
         printf("3 - Emprestar Livro\n");
         printf("4 - Buscar Livros\n");
@@ -387,7 +376,7 @@ void menu()
 
         switch(num)
         {
-            case 1: Incluir_Livro();
+            case 1: Cadastrar_Livro(l[T], &qtd_livros);
                 break;
             case 2: Remover_Livro();
                 break;
@@ -408,5 +397,4 @@ void menu()
                 system("pause");
         }
     }while(num != 8);
-
 }

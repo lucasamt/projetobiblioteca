@@ -8,7 +8,7 @@ Lucas Ament 20011615
 Renato Donizeti da Silva Junior 20014023
 
 */
-#define T 255
+#define T 100
 
 #include <math.h>
 #include <stdio.h>
