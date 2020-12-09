@@ -8,6 +8,8 @@ Lucas Ament 20011615
 Renato Donizeti da Silva Junior 20014023
 
 */
+#define T 255
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,26 +21,19 @@ Renato Donizeti da Silva Junior 20014023
 #include <stdbool.h>
 
 #include "./mods/main.c"
-#define T 1024
+#include "./mods/models/livro.c"
+#include "./mods/models/usuarios.c"
 
-typedef
-    struct
+int main()
 {
-  char nome_Livro[30];
-  char nome_Autor[60];
-  char data_Publicacao[11];
-}Cadastro;
+    setlocale(LC_ALL, "portuguese");
+    menu();
+    printf("\n\n\n\n\n");
+    system("pause");
+    return 0;
+}
 
-typedef
-    enum
-{
-  CADASTRAR,
-  CONSULTAR,
-  EXCLUIR,
-  SAIR
-}Escolha;
-
-unsigned int filesize (FILE* sisbibli)
+/*unsigned int filesize (FILE* sisbibli)
 {
     Cadastro cad;
     int posicao, retorno, posOriginal;
@@ -78,11 +73,4 @@ unsigned int filesize (FILE* sisbibli)
     retorno = ftell(sisbibli);
     fseek (sisbibli, posOriginal, SEEK_SET);
     return retorno;
-}
-
-int main()
-{
-    //Fazer DO WHILE com switch case dentro do DO WHILE e colocar para voltar ao menu toda vez que a condição for diferente de SAIR
-
-    return 0;
-}
+}*/
