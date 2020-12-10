@@ -1,5 +1,27 @@
 void Cadastrar_Livro(Livro l[T], int *qtd_livros)
+// void Cadastrar_Livro(FILE* mc)
 {
+
+    // Contato contato;
+    //
+    // printf ("\nNome.......: ");
+    // gets   (contato.nome);
+    // printf ("Aniversario: ");
+    // gets   (contato.aniversario);
+    // printf ("Endereco...: ");
+    // gets   (contato.endereco);
+    // printf ("Telefone...: ");
+    // gets   (contato.telefone);
+    // printf ("Celular....: ");
+    // gets   (contato.celular);
+    // printf ("e-mail.....: ");
+    // gets   (contato.email);
+    // printf ("skype......: ");
+    // gets   (contato.skype);
+    //
+    // fseek  (mc, 0, SEEK_END);
+    // fwrite (&contato, sizeof(Contato), 1, mc);
+    //
     int contador_Livro = *qtd_livros;
     char escolha;
      do
@@ -80,105 +102,93 @@ void Remover_Livro()
 
 void Emprestar_Livro()
 {
-    // char ra[10];
-    // int x, y, h, aux, contador2, cont, num;
-    // float media;
-    // cont = *contador;
-    // do
+    // char nome [31];
+    // unsigned int posicao, qtd=qtosContatos(mc);
+    // Contato contato;
+    //
+    // if (qtd == 0)
+    //     printf ("\nAgenda vazia!\n\n");
+    // else
     // {
-    //     system("cls");
-    //     printf("Digite o RA do aluno: ");
-    //     fflush(stdin);
-    //     gets(ra);
-    //     for (x=0;x<=cont;x++)
+    //     printf ("\nNome.......: ");
+    //     gets   (nome);
+    //
+    //     for (posicao=0; posicao<qtd; posicao++)
     //     {
-    //         if(strcmp(ra, a[x].RA) == 0)
+    //         fseek (mc, posicao*sizeof(Contato), SEEK_SET);
+    //         fread (&contato, sizeof(Contato), 1, mc);
+    //
+    //         if (strcmp(nome,contato.nome) == 0)
     //         {
-    //             aux=x;
+    //             printf ("Aniversario: %s", contato.aniversario);
+    //             printf ("\nEndereco...: %s", contato.endereco);
+    //             printf ("\nTelefone...: %s", contato.telefone);
+    //             printf ("\nCelular....: %s", contato.celular);
+    //             printf ("\ne-mail.....: %s", contato.email);
+    //             printf ("\nskype......: %s\n", contato.skype);
+    //
+    //             break;
     //         }
     //     }
-    //     if(strcmp(ra, a[aux].RA) == 0)
-    //     {
-    //         contador2=1;
-    //         printf("O aluno do RA: %s. De nome: %s.", a[aux].RA, a[aux].nome);
-    //         printf("\nQue cursa as disciplinas:\n");
-    //         for(y=0;y<quant[aux];y++)
-    //         {
-    //             media=0;
-    //             media = (a[aux].disciplina[y].nota1 + a[aux].disciplina[y].nota2) / 2;
-    //             printf("Matéria: %s.\nNota 1: %f.\nNota 2: %f.\nMédia: %.2f.\n", a[aux].disciplina[y].materia, a[aux].disciplina[y].nota1, a[aux].disciplina[y].nota2, media);
-    //         }
-    //         printf("\n\n\tAlterar informacoes!!!\n");
-    //         printf("Digite o novo nome: ");
-    //         fflush(stdin);
-    //         gets(a[aux].nome);
-    //         printf("Digite o novo RA: ");
-    //         fflush(stdin);
-    //         gets(a[aux].RA);
-    //         printf("\nQuantas matérias cursando? ");
-    //         scanf("%d", &quant[aux]);
-    //         for(h=0;h<quant[aux];h++)
-    //         {
-    //         printf("Digite o nome da nova disciplina: ");
-    //         fflush(stdin);
-    //         gets(a[aux].disciplina[h].materia);
-    //         printf("Nota 1 alterada: ");
-    //         scanf("%f", &a[aux].disciplina[h].nota1);
-    //         printf("Nota 2: ");
-    //         scanf("%f", &a[aux].disciplina[h].nota2);
-    //         }
-    //         system("pause");
-    //     }
+    //
+    //     if (posicao==qtd)
+    //         printf ("Contato nao encontrado!\n\n");
     //     else
     //     {
-    //         printf("\nRA INVÁLIDO!!!\nDigite 0 para digitar novamente ou 1 para voltar ao menu: ");
-    //         scanf("%d", &num);
-    //         if(num==0){contador2=0;}
-    //         else if(num==1){contador2=1;}
+    //         printf ("\nNovo Nome.......: ");
+    //         gets   (contato.nome);
+    //         printf ("Novo Aniversario: ");
+    //         gets   (contato.aniversario);
+    //         printf ("Novo Endereco...: ");
+    //         gets   (contato.endereco);
+    //         printf ("Novo Telefone...: ");
+    //         gets   (contato.telefone);
+    //         printf ("Novo Celular....: ");
+    //         gets   (contato.celular);
+    //         printf ("Novo e-mail.....: ");
+    //         gets   (contato.email);
+    //         printf ("Novo skype......: ");
+    //         gets   (contato.skype);
+    //
+    //         fseek (mc, -sizeof(Contato), SEEK_CUR);
+    //         fwrite (&contato, sizeof(Contato), 1, mc);
     //     }
-    // }while(contador2==0);
+    // }
 }
 
 void Busca_Livro()
 {
-    // char ra[9];
-    // int x, y, cont, aux, num, contador;
-    // float media;
-    // cont = *buscacont;
-    // do
+    // char nome [31];
+    // unsigned int posicao, qtd=qtosContatos(mc);
+    // Contato contato;
+    //
+    // if (qtd == 0)
+    //     printf ("\nAgenda vazia!\n\n");
+    // else
     // {
-    //     system("cls");
-    //     printf("Digite o RA do aluno: ");
-    //     fflush(stdin);
-    //     gets(ra);
-    //     for (x=0;x<=cont;x++)
+    //     printf ("\nNome.......: ");
+    //     gets   (nome);
+    //
+    //     for (posicao=0; posicao<qtd; posicao++)
     //     {
-    //         if(strcmp(ra, d[x].RA) == 0)
+    //         fseek (mc, posicao*sizeof(Contato), SEEK_SET);
+    //         fread (&contato, sizeof(Contato), 1, mc);
+    //
+    //         if (strcmp(nome,contato.nome) == 0)
     //         {
-    //             aux=x;
+    //             printf ("Aniversario: %s", contato.aniversario);
+    //             printf ("\nEndereco...: %s", contato.endereco);
+    //             printf ("\nTelefone...: %s", contato.telefone);
+    //             printf ("\nCelular....: %s", contato.celular);
+    //             printf ("\ne-mail.....: %s", contato.email);
+    //             printf ("\nskype......: %s\n", contato.skype);
+    //
+    //             return;
     //         }
     //     }
-    //     if(strcmp(ra, d[aux].RA) == 0)
-    //     {
-    //         contador=1;
-    //         printf("O aluno do RA: %s De nome: %s", d[aux].RA, d[aux].nome);
-    //         printf("\nQue cursa as disciplinas:\n");
-    //         for(y=0;y<quant[aux];y++)
-    //         {
-    //             media=0;
-    //             media = (d[aux].disciplina[y].nota1 + d[aux].disciplina[y].nota2) / 2;
-    //             printf("Matéria: %s\nNota 1: %.2f\nNota 2: %.2f\nMédia: %.2f\n", d[aux].disciplina[y].materia, d[aux].disciplina[y].nota1, d[aux].disciplina[y].nota2, media);
-    //         }
-    //         system("pause");
-    //     }
-    //     else
-    //     {
-    //         printf("\nRA INVÁLIDO!!!\nDigite 0 para digitar novamente ou 1 para voltar ao menu: ");
-    //         scanf("%d", &num);
-    //         if(num==0){contador=0;}
-    //         else if(num==1){contador=1;}
-    //     }
-    // }while(contador==0);
+    //
+    //     printf ("Contato nao encontrado!\n\n");
+    // }
 }
 
 /*void Listar_Todos_Livros(list c[100], int *contador, int quant[100])
@@ -397,4 +407,52 @@ void menu()
                 system("pause");
         }
     }while(num != 8);
+}
+
+unsigned int filesize (FILE* mc)
+{
+    Contato contato;
+    int posicao, retorno, posOriginal;
+
+    posOriginal = ftell(mc);
+
+    fseek (mc, 0, SEEK_END);
+    posicao = ftell(mc)/sizeof(Contato)-1;
+
+    if (posicao==-1)
+    {
+        fseek (mc, posOriginal, SEEK_SET);
+        return 0;
+    }
+
+    for (;;)
+    {
+        fseek (mc, posicao*sizeof(Contato), SEEK_SET);
+        fread (&contato, sizeof(Contato), 1, mc);
+
+        if (vazio(contato))
+        {
+            posicao--;
+            if (posicao==-1)
+            {
+                fseek (mc, posOriginal, SEEK_SET);
+                return 0;
+            }
+        }
+        else
+        {
+            retorno = ftell(mc);
+            fseek (mc, posOriginal, SEEK_SET);
+            return retorno;
+        }
+    }
+
+    retorno = ftell(mc);
+    fseek (mc, posOriginal, SEEK_SET);
+    return retorno;
+}
+
+unsigned int qtosContatos (FILE* mc)
+{ftruncate(mc);
+    return filesize(mc)/sizeof(Contato);
 }
