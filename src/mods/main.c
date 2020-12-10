@@ -1,258 +1,198 @@
-void Cadastrar_Livro(Livro l[T], int *qtd_livros)
-// void Cadastrar_Livro(FILE* mc)
+void Cadastrar_Livro(FILE* mc)
 {
 
-    // Contato contato;
-    //
-    // printf ("\nNome.......: ");
-    // gets   (contato.nome);
-    // printf ("Aniversario: ");
-    // gets   (contato.aniversario);
-    // printf ("Endereco...: ");
-    // gets   (contato.endereco);
-    // printf ("Telefone...: ");
-    // gets   (contato.telefone);
-    // printf ("Celular....: ");
-    // gets   (contato.celular);
-    // printf ("e-mail.....: ");
-    // gets   (contato.email);
-    // printf ("skype......: ");
-    // gets   (contato.skype);
-    //
-    // fseek  (mc, 0, SEEK_END);
-    // fwrite (&contato, sizeof(Contato), 1, mc);
-    //
-    int contador_Livro = *qtd_livros;
-    char escolha;
-     do
-     {
-         printf("Digite o nome do livro: ");
-         fflush(stdin);
-         gets(l[contador_Livro].nome_Livro);
-         printf("Digite o seu autor: ");
-         fflush(stdin);
-         gets(l[contador_Livro].nome_Autor);
-         printf("Digite sua data de publicação: ");
-         fflush(stdin);
-         gets(l[contador_Livro].data_Publicacao);
-         do
-         {
-             printf("Voce deseja adicionar mais livros?\n\"S\" ou \"N\":");
-             scanf(" %c", &escolha);
-             if (toupper(escolha) != 'S' && toupper(escolha) != 'N')
-             {
-                 printf("\nESCOLHA INVÁLIDA!!!\nDigite Novamente...");
-             }
-         } while (toupper(escolha) != 'S' && toupper(escolha) != 'N');
-         contador_Livro++;
-     }while(toupper(escolha)!='N');
-     *qtd_livros+=contador_Livro;
+    Livro cadastro;
+
+    printf ("\nNome...............: ");
+    fflush(stdin);
+    gets(Livro.nome);
+    printf ("\nAutor..............: ");
+    flush(stdin);
+    gets(Livro.nome_Autor);
+    printf ("Data de publicação...: ");
+    fflush(stdin);
+    gets(Livro.data_Publicacao);
+    fseek  (mc, 0, SEEK_END);
+    fwrite (&cadastro, sizeof(cadastro), 1, mc);
 }
 
-void Remover_Livro()
+void Remover_Livro(FILE* mc)
 {
-    // char excluir_RA[9], esco;
-    // int x, y, z, qtd=0, aux=0, cont=0, num=0;
-    // do
-    // {
-    //     printf("\nDigite o RA: ");
-    //     fflush(stdin);
-    //     gets(excluir_RA);
-    //     for (x=0;x<=*bcont;x++)
-    //     {
-    //         if(strcmp(excluir_RA, b[x].RA)==0)
-    //         {
-    //             aux=x;
-    //         }
-    //     }
-    //     if(strcmp(excluir_RA, b[aux].RA)==0)
-    //     {
-    //         cont=1;
-    //         *exc++;
-    //         b[aux].nome[0]='\0';
-    //         b[aux].RA[0]='\0';
-    //         for(x=0;x<quanti[y];x++)
-    //         {
-    //             b[aux].disciplina[x].materia[0]='\0';
-    //             b[y].disciplina[z].nota1=0;
-    //             b[y].disciplina[z].nota2=0;
-    //         }
-    //         do
-    //         {
-    //             printf("Voce deseja remover mais algum aluno?\nDigite \"S\" para sim ou \"N\" para não: ");
-    //             scanf(" %c", &esco);
-    //             if (toupper(esco) != 'S' && toupper(esco) != 'N')
-    //             {
-    //                 printf("\nESCOLHA INVÁLIDA!!!\nDigite Novamente...");
-    //             }
-    //             else if(toupper(esco) == 'S'){cont=0;}
-    //             else if(toupper(esco) == 'N'){cont=1;}
-    //
-    //         } while (toupper(esco) != 'S' && toupper(esco) != 'N');
-    //     }
-    //     else
-    //     {
-    //         printf("\nRA INVÁLIDO!!!\nDigite 0 para digitar novamente ou 1 para voltar ao menu: ");
-    //         scanf("%d", &num);
-    //         if(num==0){cont=0;}
-    //         else if(num==1){cont=1;}
-    //     }
-    // }while(cont==0);
+    int idLivro;
+    unsigned int posicao, qtd=qtdLivros();
+    Livro livro
+
+    if (qtd == 0)
+        printf ("\nNao ha livros cadastrados!\n\n");
+    else
+    {
+        printf ("\nID.......: ");
+        scanf("%d", &idLivro);
+
+        for (posicao=0; posicao<qtd; posicao++)
+        {
+            fseek (mc,posicao*sizeof(Livro),SEEK_SET);
+            fread (&contato, sizeof(Livro), 1, mc);
+
+            if (livro.id == 0)
+            {
+                printf ("\ne-mail.....: %s", livro.id);
+                printf ("Aniversario: %s", livro.nome_Livro);
+                printf ("\nEndereco...: %s", livro.nome_Autor);
+                printf ("\nTelefone...: %s", livro.data_Publicacao);
+                printf ("\nCelular....: %s", livro.emprestado_por);
+
+                break;
+            }
+        }
+
+        if (posicao==qtd)
+            printf ("Contato nao encontrado!\n\n");
+        else
+        {
+            for (;posicao<qtd-1; posicao++)
+            {
+                fseek  (mc, (posicao+1)*sizeof(Contato), SEEK_SET);
+                fread  (&contato, sizeof(Contato), 1, mc);
+                fseek  (mc, posicao*sizeof(Contato), SEEK_SET);
+                fwrite (&contato, sizeof(Contato), 1, mc);
+            }
+
+            printf ("%d\n", vazio(contato));
+            memset (&contato, 0, sizeof(Contato));
+            printf ("%d\n", vazio(contato));
+            fwrite (&contato, sizeof(Contato), 1, mc);
+
+            printf ("Informacoes excluidas com sucesso!\n\n");
+        }
+    }
 }
 
 void Emprestar_Livro()
 {
-    // char nome [31];
-    // unsigned int posicao, qtd=qtosContatos(mc);
-    // Contato contato;
-    //
-    // if (qtd == 0)
-    //     printf ("\nAgenda vazia!\n\n");
-    // else
-    // {
-    //     printf ("\nNome.......: ");
-    //     gets   (nome);
-    //
-    //     for (posicao=0; posicao<qtd; posicao++)
-    //     {
-    //         fseek (mc, posicao*sizeof(Contato), SEEK_SET);
-    //         fread (&contato, sizeof(Contato), 1, mc);
-    //
-    //         if (strcmp(nome,contato.nome) == 0)
-    //         {
-    //             printf ("Aniversario: %s", contato.aniversario);
-    //             printf ("\nEndereco...: %s", contato.endereco);
-    //             printf ("\nTelefone...: %s", contato.telefone);
-    //             printf ("\nCelular....: %s", contato.celular);
-    //             printf ("\ne-mail.....: %s", contato.email);
-    //             printf ("\nskype......: %s\n", contato.skype);
-    //
-    //             break;
-    //         }
-    //     }
-    //
-    //     if (posicao==qtd)
-    //         printf ("Contato nao encontrado!\n\n");
-    //     else
-    //     {
-    //         printf ("\nNovo Nome.......: ");
-    //         gets   (contato.nome);
-    //         printf ("Novo Aniversario: ");
-    //         gets   (contato.aniversario);
-    //         printf ("Novo Endereco...: ");
-    //         gets   (contato.endereco);
-    //         printf ("Novo Telefone...: ");
-    //         gets   (contato.telefone);
-    //         printf ("Novo Celular....: ");
-    //         gets   (contato.celular);
-    //         printf ("Novo e-mail.....: ");
-    //         gets   (contato.email);
-    //         printf ("Novo skype......: ");
-    //         gets   (contato.skype);
-    //
-    //         fseek (mc, -sizeof(Contato), SEEK_CUR);
-    //         fwrite (&contato, sizeof(Contato), 1, mc);
-    //     }
-    // }
-}
+    char nome [31];
+    unsigned int posicao, qtd=qtdLivros(mc);
+    Livro livro;
 
-void Busca_Livro()
-{
-    // char nome [31];
-    // unsigned int posicao, qtd=qtosContatos(mc);
-    // Contato contato;
-    //
-    // if (qtd == 0)
-    //     printf ("\nAgenda vazia!\n\n");
-    // else
-    // {
-    //     printf ("\nNome.......: ");
-    //     gets   (nome);
-    //
-    //     for (posicao=0; posicao<qtd; posicao++)
-    //     {
-    //         fseek (mc, posicao*sizeof(Contato), SEEK_SET);
-    //         fread (&contato, sizeof(Contato), 1, mc);
-    //
-    //         if (strcmp(nome,contato.nome) == 0)
-    //         {
-    //             printf ("Aniversario: %s", contato.aniversario);
-    //             printf ("\nEndereco...: %s", contato.endereco);
-    //             printf ("\nTelefone...: %s", contato.telefone);
-    //             printf ("\nCelular....: %s", contato.celular);
-    //             printf ("\ne-mail.....: %s", contato.email);
-    //             printf ("\nskype......: %s\n", contato.skype);
-    //
-    //             return;
-    //         }
-    //     }
-    //
-    //     printf ("Contato nao encontrado!\n\n");
-    // }
-}
-
-/*void Listar_Todos_Livros(list c[100], int *contador, int quant[100])
-{
-    int x, y, cont;
-    float media;
-    cont = *contador;
-
-    for (y=0;y<cont;y++)
+    if (qtd == 0)
+        printf ("\nLivro esta emprestado!\n\n");
+    else
     {
-        if (c[y].nome[0]!='\0' && c[y].RA[0]!='\0')
-        {
-            printf("\n_____________________________________________\n\n\n");
-            printf("Nome: %s\nRA: %s\n\n", c[y].nome, c[y].RA);
-            for(x=0;x<quant[y];x++)
-            {
-                media=0;
-                media = (c[y].disciplina[x].nota1 + c[y].disciplina[x].nota2) / 2;
-                printf("Matéria: %s\nNota 1: %.2f\nNota 2: %.2f\nMédia: %.2f\n\n", c[y].disciplina[x].materia, c[y].disciplina[x].nota1, c[y].disciplina[x].nota2, media);
-            }
-        }
-    }
-    printf("\n\n");
-    system("pause");
-}*/
+        printf ("\nLivro.......: ");
+        gets   (livro);
 
-void Incluir_Usuario()
+        for (posicao=0; posicao<qtd; posicao++)
+        {
+            fseek (mc, posicao*sizeof(Livro), SEEK_SET);
+            fread (&Livro, sizeof(Livro), 1, mc);
+
+            if (strcmp(nome,Livro.nome) == 0)
+            {
+                 printf ("Aniversario: %s", contato.aniversario);
+                 printf ("\nEndereco...: %s", contato.endereco);
+                 printf ("\nTelefone...: %s", contato.telefone);
+                 printf ("\nCelular....: %s", contato.celular);
+                 printf ("\ne-mail.....: %s", contato.email);
+                 printf ("\nskype......: %s\n", contato.skype);
+
+                 break;
+             }
+         }
+
+         if (posicao==qtd)
+             printf ("Livro nao encontrado!\n\n");
+         else
+         {
+             printf ("\nNovo Nome.......: ");
+             gets   (contato.nome);
+             printf ("Novo Aniversario: ");
+             gets   (contato.aniversario);
+             printf ("Novo Endereco...: ");
+             gets   (contato.endereco);
+             printf ("Novo Telefone...: ");
+             gets   (contato.telefone);
+             printf ("Novo Celular....: ");
+             gets   (contato.celular);
+             printf ("Novo e-mail.....: ");
+             gets   (contato.email);
+             printf ("Novo skype......: ");
+             gets   (contato.skype);
+
+             fseek (mc, -sizeof(Contato), SEEK_CUR);
+             fwrite (&contato, sizeof(Contato), 1, mc);
+         }
+     }
+}
+
+void Busca_Livro(FILE* mc)
 {
-    // char escolha;
-    // int  h, cont, quant;
-    // cont = *contador;
-    // do
-    // {
-    //     printf("Digite o seu nome: ");
-    //     fflush(stdin);
-    //     gets(a[cont].nome);
-    //     printf("Digite o seu RA: ");
-    //     fflush(stdin);
-    //     gets(a[cont].RA);
-    //     printf("\nQuantas matérias cursando? ");
-    //     scanf("%d", &quant);
-    //     for(h=0;h<quant;h++)
-    //     {
-    //         printf("Digite o nome da disciplina: ");
-    //         fflush(stdin);
-    //         gets(a[cont].disciplina[h].materia);
-    //         printf("Nota 1: ");
-    //         scanf("%f", &a[cont].disciplina[h].nota1);
-    //         printf("Nota 2: ");
-    //         scanf("%f", &a[cont].disciplina[h].nota2);
-    //     }
-    //     do
-    //     {
-    //         printf("Voce deseja adicionar mais algum aluno?\nDigite \"S\" para sim ou \"N\" para não: ");
-    //         scanf(" %c", &escolha);
-    //         if (toupper(escolha) != 'S' && toupper(escolha) != 'N')
-    //         {
-    //             printf("\nESCOLHA INVÁLIDA!!!\nDigite Novamente...");
-    //         }
-    //     } while (toupper(escolha) != 'S' && toupper(escolha) != 'N');
-    //     quantidade[cont]=quant;
-    //     cont++;
-    // }while(toupper(escolha)!='N');
-    // *contador+=cont;
+  char nome_Livro[T];
+  unsigned int posicao, qtd=qtosContatos(mc);
+  Livro cadastrar;
+
+  if (qtd == 0)
+      printf ("\nAgenda vazia!\n\n");
+  else
+  {
+      printf ("\nNome do Livro: ");
+      fflush(stdin);
+      gets(nome_Livro);
+
+      for (posicao=0; posicao<qtd; posicao++)
+      {
+          fseek (mc, posicao*sizeof(cadastrar), SEEK_SET);
+          fread (&cadastrar, sizeof(cadastrar), 1, mc);
+
+          if (strcmp(nome_Livro,contato.nome_Livro) == 0)
+          {
+              system("cls");
+              printf("Nome do Livro.: %s", Livro.nome_Livro);
+              printf("Autor do Livro: %s", Livro.nome_Autor);
+              if(Emprestar_Livro==0)
+              {
+               printf("O Livro esta disponivel\n");
+              }
+              else
+              {
+               printf("O livro esta emprestado\n");
+              }
+              return;
+          }
+      }
+
+      printf ("Contato nao encontrado!\n\n");
+  }
+}
+
+void Listar_Todos_Livros(FILE* mc)
+{
+    unsigned int posicao, qtd=qtosContatos(mc);
+    Livro cadastro;
+
+    if (qtd == 0)
+        printf ("\nAgenda vazia!\n\n");
+    else
+        for (posicao=0; posicao<qtd; posicao++)
+        {
+            fseek (mc, posicao*sizeof(cadastro), SEEK_SET);
+            fread (&cadastro, sizeof(cadastro), 1, mc);
+
+            printf("Nome do Livro: %s", );
+        }
+}
+
+void Incluir_Usuario(FILE* )
+{
+  Usuario incluir;
+
+  printf ("\nNome do Aluno: ");
+  fflush(stdin);
+  gets(Usuario.nome_Aluno);
+  printf ("\nRA...........: ");
+  flush(stdin);
+  gets(Usuario.ra);
+  fseek  (mc, 0, SEEK_END);
+  fwrite (&incluir, sizeof(incluir), 1, mc);
 }
 
 void Remover_Usuario()
@@ -359,12 +299,31 @@ void Alterar_Usuario()
 
 // Listar Usuário?
 
+unsigned int qtdLivros (FILE* mc)
+{
+    ftruncate(mc);
+    return filesize(mc)/sizeof(Livro);
+}
+unsigned int qtdUsuarios (FILE* mc)
+{
+    ftruncate(mc);
+    return filesize(mc)/sizeof(Usuario);
+}
+
 void menu()
 {
-    setlocale(LC_ALL, "portuguese");
-    Livro l[T]; //criação de um vetor para armazenar as informações sobre o livro a partir da typedef
-    Usuario u[T]; //criação de um vetor para armazenar as informações sobre o usuario a partir da typedef
-    int num, qtd_livros = 0;
+    FILE* LivrosDados;
+    FILE* UsuariosDados;
+
+    LivrosDados = fopen ("LivrosDados.dados", "rb+");
+    if (LivrosDados==NULL)
+        LivrosDados = fopen ("LivrosDados.dados", "wb+");
+
+    UsuariosDados = fopen ("UsuariosDados.dados", "rb+");
+    if (UsuariosDados==NULL)
+        UsuariosDados = fopen ("UsuariosDados.dados", "wb+");
+
+
     do
     {
         num=0;
@@ -386,19 +345,19 @@ void menu()
 
         switch(num)
         {
-            case 1: Cadastrar_Livro(l[T], &qtd_livros);
+            case 1: Cadastrar_Livro(LivrosDados);
                 break;
-            case 2: Remover_Livro();
+            case 2: Remover_Livro(LivrosDados);
                 break;
-            case 3: Emprestar_Livro();
+            case 3: Emprestar_Livro(LivrosDados);
                 break;
-            case 4: Busca_Livro();
+            case 4: Busca_Livro(LivrosDados);
                 break;
-            case 5: Incluir_Usuario();
+            case 5: Incluir_Usuario(UsuariosDados);
                 break;
-            case 6: Remover_Usuario();
+            case 6: Remover_Usuario(UsuariosDados);
                 break;
-            case 7: Alterar_Usuario();
+            case 7: Alterar_Usuario(UsuariosDados);
                 break;
             case 8: exit(0);
                 break;
@@ -450,9 +409,4 @@ unsigned int filesize (FILE* mc)
     retorno = ftell(mc);
     fseek (mc, posOriginal, SEEK_SET);
     return retorno;
-}
-
-unsigned int qtosContatos (FILE* mc)
-{ftruncate(mc);
-    return filesize(mc)/sizeof(Contato);
 }
