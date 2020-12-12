@@ -32,6 +32,7 @@ typedef enum
     SAIR
 } Opcao;
 
+//Verifica se o arquivo esta vazio
 unsigned int vazioUsuario (Usuario usuario)
 {
     int   qtd   = 0, posicao;
@@ -48,6 +49,7 @@ unsigned int vazioUsuario (Usuario usuario)
 }
 
 
+// Tamanho do arquivo
 unsigned int filesizeUsuario (FILE* mc)
 {
     Usuario usuario;
@@ -122,7 +124,7 @@ void listarUsuario (FILE* mc)
     Usuario usuario;
 
     if (qtd == 0)
-    printf ("\nAgenda vazia!\n\n");
+    printf ("\nSem dados\n\n");
     else
     for (posicao=0; posicao<qtd; posicao++)
     {
@@ -142,7 +144,7 @@ void excluirUsuario (FILE* mc)
     Usuario usuario;
 
     if (qtd == 0)
-    printf ("\nAgenda vazia!\n\n");
+    printf ("\nSem dados\n\n");
     else
     {
         printf ("\nNome do Aluno: ");
@@ -190,7 +192,7 @@ void atualizarUsuario (FILE* mc)
     Usuario usuario;
 
     if (qtd == 0)
-    printf ("\nAgenda vazia!\n\n");
+    printf ("\nSem dados\n\n");
     else
     {
         printf ("\nNome do Aluno: ");
@@ -238,7 +240,7 @@ void procurarUsuario (FILE* mc)
     Usuario usuario;
 
     if (qtd == 0)
-    printf ("\nAgenda vazia!\n\n");
+    printf ("\nSem dados\n\n");
     else
     {
         printf ("\nNome do Aluno: ");
@@ -364,327 +366,290 @@ void apresenteSe ()
     printf ("+----------------+\n\n");
 }
 
-unsigned int umNroNatural (char* solicitacao,
-    char* mensagem,
-    unsigned int min,
-    unsigned int max)
+void incluirLivro (FILE* mc)
+{
+    Livro livro;
+
+    printf ("\nNome do Livro: ");
+    fflush(stdin);
+    gets   (livro.nome_Livro);
+    printf ("Nome do Autor: ");
+    fflush(stdin);
+    gets   (livro.nome_Autor);
+    printf ("Data de Publicacao: ");
+    fflush(stdin);
+    gets   (livro.data_Publicacao);
+    printf ("Emprestado por: ");
+    fflush(stdin);
+    gets   (livro.emprestado_por);
+    printf ("ID: ");
+    fflush(stdin);
+    gets   (livro.id);
+    fseek  (mc, 0, SEEK_END);
+    fwrite (&livro, sizeof(Livro), 1, mc);
+}
+
+void procurarLivro (FILE* mc)
+{
+    char nome_Livro [T];
+    unsigned int posicao, qtd=qtosLivros(mc);
+    Livro livro;
+
+    if (qtd == 0)
+    printf ("\nSem dados\n\n");
+    else
     {
-        char digitacao [T]; /* 100 uteis + o '\0' */
-        unsigned int nroNat, qtdErros=0, posicao;
-
-        do
-        {
-            printf ("%s", solicitacao);
-            fflush(stdin);
-            gets (digitacao);
-
-            for (posicao=0, qtdErros=0; digitacao[posicao]!='\0'; posicao++)
-            if (digitacao[posicao]<'0' ||
-            digitacao[posicao]>'9')
-            qtdErros++;
-
-            if (strlen(digitacao)==0 || qtdErros>0)
-            printf ("%s - Favor redigitar\n\n", mensagem);
-            else
-            {
-                sscanf (digitacao, "%d", &nroNat);
-
-                if (nroNat<min || nroNat>max)
-                {
-                    qtdErros++;
-                    printf ("%s - Favor redigitar\n\n", mensagem);
-                }
-            }
-        }
-        while (strlen(digitacao)==0 || qtdErros>0);
-
-        return nroNat;
-    }
-
-    void incluirLivro (FILE* mc)
-    {
-        Livro livro;
-
         printf ("\nNome do Livro: ");
         fflush(stdin);
-        gets   (livro.nome_Livro);
-        printf ("Nome do Autor: ");
-        fflush(stdin);
-        gets   (livro.nome_Autor);
-        printf ("Data de Publicacao: ");
-        fflush(stdin);
-        gets   (livro.data_Publicacao);
-        printf ("Emprestado por: ");
-        fflush(stdin);
-        gets   (livro.emprestado_por);
-        printf ("ID: ");
-        fflush(stdin);
-        gets   (livro.id);
-        fseek  (mc, 0, SEEK_END);
-        fwrite (&livro, sizeof(Livro), 1, mc);
-    }
+        gets   (nome_Livro);
 
-    void procurarLivro (FILE* mc)
-    {
-        char nome_Livro [T];
-        unsigned int posicao, qtd=qtosLivros(mc);
-        Livro livro;
-
-        if (qtd == 0)
-        printf ("\nAgenda vazia!\n\n");
-        else
-        {
-            printf ("\nNome do Livro: ");
-            fflush(stdin);
-            gets   (nome_Livro);
-
-            for (posicao=0; posicao<qtd; posicao++)
-            {
-                fseek (mc, posicao*sizeof(Livro), SEEK_SET);
-                fread (&livro, sizeof(Livro), 1, mc);
-
-                if (strcmp(nome_Livro,livro.nome_Livro) == 0)
-                {
-                    printf ("Nome do Autor: %s", livro.nome_Autor);
-                    printf ("\nData de Publicacao: %s", livro.data_Publicacao);
-                    printf ("\nEmprestado por: %s", livro.emprestado_por);
-                    printf ("\nID: %s", livro.id);
-                    return;
-                }
-            }
-
-            printf ("Livro nao encontrado!\n\n");
-        }
-    }
-
-    void atualizarLivro (FILE* mc)
-    {
-        char nome_Livro [T];
-        unsigned int posicao, qtd=qtosLivros(mc);
-        Livro livro;
-
-        if (qtd == 0)
-        printf ("\nAgenda vazia!\n\n");
-        else
-        {
-            printf ("\nNome do Livro: ");
-            fflush(stdin);
-            gets   (nome_Livro);
-
-            for (posicao=0; posicao<qtd; posicao++)
-            {
-                fseek (mc, posicao*sizeof(Livro), SEEK_SET);
-                fread (&livro, sizeof(Livro), 1, mc);
-
-                if (strcmp(nome_Livro,livro.nome_Livro) == 0)
-                {
-                    printf ("Nome do Autor: %s", livro.nome_Autor);
-                    printf ("\nData de Publicacao: %s", livro.data_Publicacao);
-                    printf ("\nEmprestado por: %s", livro.emprestado_por);
-                    printf ("\nID: %s", livro.id);
-                    break;
-                }
-            }
-
-            if (posicao==qtd)
-            printf ("Livro nao encontrado!\n\n");
-            else
-            {
-                printf ("\nNovo Nome do Livro: ");
-                fflush(stdin);
-                gets   (livro.nome_Livro);
-                printf ("Novo Nome do Autor: ");
-                fflush(stdin);
-                gets   (livro.nome_Autor);
-                printf ("Novo Data de Publicacao: ");
-                fflush(stdin);
-                gets   (livro.data_Publicacao);
-                printf ("Novo Emprestado por: ");
-                fflush(stdin);
-                gets   (livro.emprestado_por);
-                printf ("Novo ID: ");
-                fflush(stdin);
-                gets   (livro.id);
-                fseek (mc, -sizeof(Livro), SEEK_CUR);
-                fwrite (&livro, sizeof(Livro), 1, mc);
-            }
-        }
-    }
-
-    void listarLivro (FILE* mc)
-    {
-        unsigned int posicao, qtd=qtosLivros(mc);
-        Livro livro;
-
-        if (qtd == 0)
-        printf ("\nAgenda vazia!\n\n");
-        else
         for (posicao=0; posicao<qtd; posicao++)
         {
             fseek (mc, posicao*sizeof(Livro), SEEK_SET);
             fread (&livro, sizeof(Livro), 1, mc);
 
-            printf ("\nNome do Livro: %s", livro.nome_Livro);
-            printf ("\nNome do Autor: %s", livro.nome_Autor);
-            printf ("\nData de Publicacao: %s", livro.data_Publicacao);
-            printf ("\nEmprestado por: %s", livro.emprestado_por);
-            printf ("\nID: %s", livro.id);
-
+            if (strcmp(nome_Livro,livro.nome_Livro) == 0)
+            {
+                printf ("Nome do Autor: %s", livro.nome_Autor);
+                printf ("\nData de Publicacao: %s", livro.data_Publicacao);
+                printf ("\nEmprestado por: %s", livro.emprestado_por);
+                printf ("\nID: %s", livro.id);
+                return;
+            }
         }
+
+        printf ("Livro nao encontrado!\n\n");
     }
+}
 
-    void excluirLivro (FILE* mc)
+void atualizarLivro (FILE* mc)
+{
+    char nome_Livro [T];
+    unsigned int posicao, qtd=qtosLivros(mc);
+    Livro livro;
+
+    if (qtd == 0)
+    printf ("\nSem dados\n\n");
+    else
     {
-        char nome_Livro [T];
-        unsigned int posicao, qtd=qtosLivros(mc);
-        Livro livro;
+        printf ("\nNome do Livro: ");
+        fflush(stdin);
+        gets   (nome_Livro);
 
-        if (qtd == 0)
-        printf ("\nAgenda vazia!\n\n");
+        for (posicao=0; posicao<qtd; posicao++)
+        {
+            fseek (mc, posicao*sizeof(Livro), SEEK_SET);
+            fread (&livro, sizeof(Livro), 1, mc);
+
+            if (strcmp(nome_Livro,livro.nome_Livro) == 0)
+            {
+                printf ("Nome do Autor: %s", livro.nome_Autor);
+                printf ("\nData de Publicacao: %s", livro.data_Publicacao);
+                printf ("\nEmprestado por: %s", livro.emprestado_por);
+                printf ("\nID: %s", livro.id);
+                break;
+            }
+        }
+
+        if (posicao==qtd)
+        printf ("Livro nao encontrado!\n\n");
         else
         {
-            printf ("\nNome do Livro: ");
+            printf ("\nNovo Nome do Livro: ");
             fflush(stdin);
-            gets   (nome_Livro);
-
-            for (posicao=0; posicao<qtd; posicao++)
-            {
-                fseek (mc,posicao*sizeof(Livro),SEEK_SET);
-                fread (&livro, sizeof(Livro), 1, mc);
-
-                if (strcmp(nome_Livro,livro.nome_Livro) == 0)
-                {
-                    printf ("Nome do Autor: %s", livro.nome_Autor);
-                    printf ("\nData de Publicacao: %s", livro.data_Publicacao);
-                    printf ("\nEmprestado por: %s", livro.emprestado_por);
-                    printf ("\nID: %s", livro.id);
-
-                    break;
-                }
-            }
-
-            if (posicao==qtd)
-            printf ("Livro nao encontrado!\n\n");
-            else
-            {
-                for (;posicao<qtd-1; posicao++)
-                {
-                    fseek  (mc, (posicao+1)*sizeof(Livro), SEEK_SET);
-                    fread  (&livro, sizeof(Livro), 1, mc);
-                    fseek  (mc, posicao*sizeof(Livro), SEEK_SET);
-                    fwrite (&livro, sizeof(Livro), 1, mc);
-                }
-
-                memset (&livro, 0, sizeof(Livro));
-                fwrite (&livro, sizeof(Livro), 1, mc);
-
-                printf ("Informacoes excluidas com sucesso!\n\n");
-            }
+            gets   (livro.nome_Livro);
+            printf ("Novo Nome do Autor: ");
+            fflush(stdin);
+            gets   (livro.nome_Autor);
+            printf ("Novo Data de Publicacao: ");
+            fflush(stdin);
+            gets   (livro.data_Publicacao);
+            printf ("Novo Emprestado por: ");
+            fflush(stdin);
+            gets   (livro.emprestado_por);
+            printf ("Novo ID: ");
+            fflush(stdin);
+            gets   (livro.id);
+            fseek (mc, -sizeof(Livro), SEEK_CUR);
+            fwrite (&livro, sizeof(Livro), 1, mc);
         }
     }
+}
 
-    int main ()
+void listarLivro (FILE* mc)
+{
+    unsigned int posicao, qtd=qtosLivros(mc);
+    Livro livro;
+
+    if (qtd == 0)
+    printf ("\nSem dados\n\n");
+    else
+    for (posicao=0; posicao<qtd; posicao++)
     {
-        static char* menuLivros [6] = {
-            "Incluir Livro",
-            "Procurar Livro",
-            "Atualizar Livro",
-            "Listar Livros",
-            "Excluir Livro",
-            "Sair do Programa"
-        };
+        fseek (mc, posicao*sizeof(Livro), SEEK_SET);
+        fread (&livro, sizeof(Livro), 1, mc);
 
-        static char* menuUsuarios [6] = {
-            "Incluir Usuario",
-            "Procurar Usuario",
-            "Atualizar Usuario",
-            "Listar Usuario",
-            "Excluir Usuario",
-            "Sair do Programa"
-        };
+        printf ("\nNome do Livro: %s", livro.nome_Livro);
+        printf ("\nNome do Autor: %s", livro.nome_Autor);
+        printf ("\nData de Publicacao: %s", livro.data_Publicacao);
+        printf ("\nEmprestado por: %s", livro.emprestado_por);
+        printf ("\nID: %s", livro.id);
 
-        int modulo;
-        FILE* muitosLivros;
-        FILE* muitosUsuarios;
-        Opcao opcao;
+    }
+}
 
-        system("cls");
-        apresenteSe();
+void excluirLivro (FILE* mc)
+{
+    char nome_Livro [T];
+    unsigned int posicao, qtd=qtosLivros(mc);
+    Livro livro;
 
-        muitosLivros = fopen ("livros.dados", "rb+");
-        if (muitosLivros==NULL)
-        muitosLivros = fopen ("livros.dados", "wb+");
+    if (qtd == 0)
+    printf ("\nSem dados\n\n");
+    else
+    {
+        printf ("\nNome do Livro: ");
+        fflush(stdin);
+        gets   (nome_Livro);
 
-        muitosUsuarios = fopen ("usuario.dados", "rb+");
-        if (muitosUsuarios==NULL)
-        muitosUsuarios = fopen ("usuario.dados", "wb+");
+        for (posicao=0; posicao<qtd; posicao++)
+        {
+            fseek (mc,posicao*sizeof(Livro),SEEK_SET);
+            fread (&livro, sizeof(Livro), 1, mc);
 
+            if (strcmp(nome_Livro,livro.nome_Livro) == 0)
+            {
+                printf ("Nome do Autor: %s", livro.nome_Autor);
+                printf ("\nData de Publicacao: %s", livro.data_Publicacao);
+                printf ("\nEmprestado por: %s", livro.emprestado_por);
+                printf ("\nID: %s", livro.id);
+
+                break;
+            }
+        }
+
+        if (posicao==qtd)
+        printf ("Livro nao encontrado!\n\n");
+        else
+        {
+            for (;posicao<qtd-1; posicao++)
+            {
+                fseek  (mc, (posicao+1)*sizeof(Livro), SEEK_SET);
+                fread  (&livro, sizeof(Livro), 1, mc);
+                fseek  (mc, posicao*sizeof(Livro), SEEK_SET);
+                fwrite (&livro, sizeof(Livro), 1, mc);
+            }
+
+            memset (&livro, 0, sizeof(Livro));
+            fwrite (&livro, sizeof(Livro), 1, mc);
+
+            printf ("Informacoes excluidas com sucesso!\n\n");
+        }
+    }
+}
+
+int main ()
+{
+    static char* menuLivros [6] = {
+        "Incluir Livro",
+        "Procurar Livro",
+        "Atualizar Livro",
+        "Listar Livros",
+        "Excluir Livro",
+        "Sair do Programa"
+    };
+
+    static char* menuUsuarios [6] = {
+        "Incluir Usuario",
+        "Procurar Usuario",
+        "Atualizar Usuario",
+        "Listar Usuario",
+        "Excluir Usuario",
+        "Sair do Programa"
+    };
+
+    int modulo;
+    FILE* muitosLivros;
+    FILE* muitosUsuarios;
+    Opcao opcao;
+
+    system("cls");
+    apresenteSe();
+
+    muitosLivros = fopen ("livros.dados", "rb+");
+    if (muitosLivros==NULL)
+    muitosLivros = fopen ("livros.dados", "wb+");
+
+    muitosUsuarios = fopen ("usuario.dados", "rb+");
+    if (muitosUsuarios==NULL)
+    muitosUsuarios = fopen ("usuario.dados", "wb+");
+
+    do
+    {
         do
         {
-            do
+            printf("\n Voce deseja:");
+            printf("\n 1 - Fazer operacoes com Livros");
+            printf("\n 2 - Fazer operacoes com Usuarios");
+            printf("\n 3 - Sair\n");
+            scanf("%d", &modulo);
+        }while(modulo != 1 && modulo != 2 && modulo != 3);
+
+        if(modulo == 3){
+            exit(0);
+        }
+
+        if(modulo == 1){
+            opcao = opcaoEscolhida (menuLivros, 6);
+
+            switch (opcao)
             {
-                printf("\n Voce deseja:");
-                printf("\n 1 - Fazer operacoes com Livros");
-                printf("\n 2 - Fazer operacoes com Usuarios");
-                printf("\n 3 - Sair\n");
-                scanf("%d", &modulo);
-            }while(modulo != 1 && modulo != 2 && modulo != 3);
+                case INCLUIR:
+                incluirLivro (muitosLivros);
+                break;
 
-            if(modulo == 3){
-                exit(0);
+                case PROCURAR:
+                procurarLivro (muitosLivros);
+                break;
+
+                case ATUALIZAR:
+                atualizarLivro (muitosLivros);
+                break;
+
+                case LISTAR:
+                listarLivro (muitosLivros);
+                break;
+
+                case EXCLUIR:
+                excluirLivro (muitosLivros);
             }
+        }else{
+            opcao = opcaoEscolhida (menuUsuarios, 6);
 
-            if(modulo == 1){
-                opcao = opcaoEscolhida (menuLivros, 6);
+            switch (opcao)
+            {
+                case INCLUIR:
+                incluirUsuario (muitosUsuarios);
+                break;
 
-                switch (opcao)
-                {
-                    case INCLUIR:
-                    incluirLivro (muitosLivros);
-                    break;
+                case PROCURAR:
+                procurarUsuario (muitosUsuarios);
+                break;
 
-                    case PROCURAR:
-                    procurarLivro (muitosLivros);
-                    break;
+                case ATUALIZAR:
+                atualizarUsuario (muitosUsuarios);
+                break;
 
-                    case ATUALIZAR:
-                    atualizarLivro (muitosLivros);
-                    break;
+                case LISTAR:
+                listarUsuario (muitosUsuarios);
+                break;
 
-                    case LISTAR:
-                    listarLivro (muitosLivros);
-                    break;
-
-                    case EXCLUIR:
-                    excluirLivro (muitosLivros);
-                }
-            }else{
-                opcao = opcaoEscolhida (menuUsuarios, 6);
-
-                switch (opcao)
-                {
-                    case INCLUIR:
-                    incluirUsuario (muitosUsuarios);
-                    break;
-
-                    case PROCURAR:
-                    procurarUsuario (muitosUsuarios);
-                    break;
-
-                    case ATUALIZAR:
-                    atualizarUsuario (muitosUsuarios);
-                    break;
-
-                    case LISTAR:
-                    listarUsuario (muitosUsuarios);
-                    break;
-
-                    case EXCLUIR:
-                    excluirUsuario (muitosUsuarios);
-                }
+                case EXCLUIR:
+                excluirUsuario (muitosUsuarios);
             }
         }
-        while (opcao != SAIR);
-
-        fclose (muitosLivros);
     }
+    while (opcao != SAIR);
+
+    fclose (muitosLivros);
+}
